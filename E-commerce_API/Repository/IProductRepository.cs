@@ -8,7 +8,7 @@ namespace E_commerce_API.Repository
         Product GetById(int id);
         void Insert(Product obj);
         void Update(Product obj);
-        void DeleteById(int id);
+        void Delete(int id);
         void Save();
     }
 }

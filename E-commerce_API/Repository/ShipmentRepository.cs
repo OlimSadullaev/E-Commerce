@@ -3,36 +3,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_commerce_API.Repository
 {
-    public class ProductRepository : IProductRepository
+    public class ShipmentRepository : IShipmentRepository
     {
         Context context;
 
-        public ProductRepository(Context context) 
+        // inject Context
+        public ShipmentRepository(Context context)
         {
             this.context = context;
         }
 
         public void Delete(int id)
         {
-            Product prd = GetById(id);
-            context.Remove(prd);
+            Shipment shipment = GetById(id);
+            context.Remove(shipment);
         }
 
-        public List<Product> GetAll()
+        public List<Shipment> GetAll()
         {
-            return context.products
-                .Include(p => p.category)
-                .ToList();
+            return context.shipments.Include(s => s.customer).ToList();
         }
 
-        public Product GetById(int id)
+        public Shipment GetById(int id)
         {
-            return context.products
-                .Include(p => p.category)
+            return context.shipments
                 .FirstOrDefault(p => p.Id == id);
         }
 
-        public void Insert(Product obj)
+        public void Insert(Shipment obj)
         {
             context.Add(obj);
         }
@@ -42,7 +40,7 @@ namespace E_commerce_API.Repository
             context.SaveChanges();
         }
 
-        public void Update(Product obj)
+        public void Update(Shipment obj)
         {
             context.Update(obj);
         }
