@@ -47,13 +47,13 @@ namespace E_commerce_API.Controllers
 
             if(product == null)
             {
-                GeneralResponse response = new GeneralResponse()
+                GeneralResponse localResponse = new GeneralResponse()
                 {
                     IsPass = false,
                     Message = "Id not found"
                 };
 
-                return response;
+                return localResponse;
             }
 
             var productDTo = new ProductDTO
